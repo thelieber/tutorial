@@ -1,1 +1,3 @@
-from parent import Animal
+from assignment2 import (Logfile,
+                         Delimfile,
+                        )
