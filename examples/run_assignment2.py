@@ -16,6 +16,7 @@ c.write(['1', '2', '3', '4'])
 
 
 
+
 """
 >cat log.txt
 2015-02-01 12:33    this is a log message

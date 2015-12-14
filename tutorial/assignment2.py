@@ -1,6 +1,10 @@
 import abc
 import datetime
 
+"""
+Example using inheritance and abstract classes
+"""
+
 class WriteFile(object):
     
     __metaclass__ = abc.ABCMeta
@@ -8,7 +12,11 @@ class WriteFile(object):
     def __init__(self, filename):
         self.filename = filename
         
-    def write(self, textln):
+    @abc.abstractmethod
+    def write(self):
+        return
+        
+    def write_line(self, textln):
         fh = open(self.filename, 'a')
         fh.write(textln)
         fh.close()
@@ -17,7 +25,7 @@ class Logfile(WriteFile):
     
     def write(self, textln):
         dt_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-        super(Logfile, self).write("{}    {}\n".format(dt_str, textln))
+        self.write_line("{}    {}\n".format(dt_str, textln))
 
 class Delimfile(WriteFile):
     
@@ -26,18 +34,5 @@ class Delimfile(WriteFile):
         self.delimeter = delimeter
         
     def write(self, alist):
-        super(Delimfile, self).write("{}\n".format(self.delimeter.join(alist)))
-        
+        self.write_line("{}\n".format(self.delimeter.join(alist)))
     
-
-"""
-dt_str = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-print dt_str
-
-fh = open('test.txt','w')
-fh.write('blah')
-fh.close()
-
-open('test.txt', 'r').read()
-
-"""
